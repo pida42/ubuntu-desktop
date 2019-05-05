@@ -1,0 +1,22 @@
+version: "2"
+
+services:
+
+  ubuntu-destop:
+    env_file:
+      - .env
+    build:
+      context: ubuntu-desktop
+      args:
+        VNC_PASSWORD: "${VNC_PASSWORD}"
+        RESOLUTION: "${RESOLUTION}"
+        USER: "${USER}"
+    restart: always
+    ports:
+      - "80:80"
+      - "5900:5900"
+    volumes:
+      - /mnt/ubuntu-desktop/data/root/.cache/mozilla/:/root/.cache/mozilla/
+      - /mnt/ubuntu-desktop/data/root/.mozilla/:/root/.mozilla/
+    tmpfs:
+      - /tmp
